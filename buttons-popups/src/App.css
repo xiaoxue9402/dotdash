@@ -1,0 +1,103 @@
+.app {
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.accept-Button {
+  margin: 5px;
+  padding: 10px;
+  border: solid green 1px;
+  border-radius: 8px;
+  color: green;
+}
+
+.accept-Button:hover {
+  background: green;
+  color: white;
+}
+
+.cancel-Button {
+  margin: 5px;
+  padding: 10px;
+  border: solid red 1px;
+  border-radius: 8px;
+  color: red;
+}
+
+.cancel-Button:hover {
+  background: red;
+  color: white;
+}
+
+.toast-Container {
+  right: -100px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: blue;
+}
+.accept-Toast-Container {
+  top: 100px;
+}
+.cancel-Toast-Container {
+  bottom: 100px;
+}
+
+.slide-in {
+   position: absolute;
+   right: -100px;
+   width: 100px;
+   height: 100px;
+   background: blue;
+   animation: slide-in 0.5s forwards;
+   -webkit-animation: slide-in 0.5s forwards;
+}
+
+.slide-out {
+  position: absolute;
+   right: 0px;
+   width: 100px;
+   height: 100px;
+   background: blue;
+   animation: slide-out 0.5s forwards;
+   -webkit-animation: slide-out 0.5s forwards;
+}
+
+@keyframes slide-in {
+  0% {
+    -webkit-transform: translateX(0%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+  }
+}
+
+@-webkit-keyframes slide-in {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@-webkit-keyframes slide-out {
+  0% {
+    -webkit-transform: translateX(0%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+  }
+}
