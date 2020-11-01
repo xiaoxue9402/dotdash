@@ -1,17 +1,20 @@
 import "./App.css";
-import React from "react";
+import React, {useState} from "react";
 import { AcceptButton, CancelButton } from "./Buttons.js";
 import { AcceptToast, CancelToast } from "./Toasts.js";
 
 const App = () => {
-  const [accepted, setAccepted] = React.useState(false);
-  const [cancelled, setCancelled] = React.useState(false);
+  const [accepted, setAccepted] = useState(false);
+  const [cancelled, setCancelled] = useState(false);
 
   const dismissToast = className => {
     const toastConatiner = document.getElementsByClassName(className)[0];
     toastConatiner.classList.remove("slide-in");
     toastConatiner.classList.add("slide-out");
-
+    setTimeout(() => {
+      const toastConatiner = document.getElementsByClassName(className)[0];
+      toastConatiner.classList.remove("slide-out");
+    }, 500)
   };
 
   const dismissAllToasts = () => {
@@ -31,9 +34,11 @@ const App = () => {
       "accept-Toast-Container"
     )[0];
     toastConatiner.classList.add("slide-in");
-    setInterval(() => {
-      dismissToast("accept-Toast-Container");
-      setAccepted(false);
+    setTimeout(() => {
+      if (accepted) {
+        dismissToast("accept-Toast-Container");
+        setAccepted(false);
+      }
     }, 8000);
   };
   const handleCancelled = () => {
@@ -42,9 +47,11 @@ const App = () => {
       "cancel-Toast-Container"
     )[0];
     toastConatiner.classList.add("slide-in");
-    setInterval(() => {
-      dismissToast("cancel-Toast-Container");
-      setCancelled(false);
+    setTimeout(() => {
+      if(cancelled) {
+        dismissToast("cancel-Toast-Container");
+        setCancelled(false);
+      }
     }, 8000);
   };
 
