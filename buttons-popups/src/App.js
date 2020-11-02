@@ -1,74 +1,70 @@
+import React from "react";
+import Toast from './Toast.js';
+import Button from './Button.js';
+
 import "./App.css";
-import React, {useState} from "react";
-import { AcceptButton, CancelButton } from "./Buttons.js";
-import { AcceptToast, CancelToast } from "./Toasts.js";
 
 const App = () => {
-  const [accepted, setAccepted] = useState(false);
-  const [cancelled, setCancelled] = useState(false);
+  const [list, setList] = useState([]);
 
-  const dismissToast = className => {
-    const toastConatiner = document.getElementsByClassName(className)[0];
-    toastConatiner.classList.remove("slide-in");
-    toastConatiner.classList.add("slide-out");
-    setTimeout(() => {
-      const toastConatiner = document.getElementsByClassName(className)[0];
-      toastConatiner.classList.remove("slide-out");
-    }, 500)
-  };
-
-  const dismissAllToasts = () => {
-    if (accepted) {
-      dismissToast("accept-Toast-Container");
-      setAccepted(false);
+  const BUTTON_PROPS = [
+    {
+      id: 1,
+      type: "accept",
+      className: "accept",
+      label: "Accept"
+    },
+    {
+      id: 2,
+      type: "cancel",
+      className: "cancel",
+      label: "Cancel"
     }
-    if (cancelled) {
-      dismissToast("cancel-Toast-Container");
-      setCancelled(false);
-    }
-  };
+  ];
 
-  const handleAccepted = () => {
-    setAccepted(true);
-    const toastConatiner = document.getElementsByClassName(
-      "accept-Toast-Container"
-    )[0];
-    toastConatiner.classList.add("slide-in");
-    setTimeout(() => {
-      if (accepted) {
-        dismissToast("accept-Toast-Container");
-        setAccepted(false);
-      }
-    }, 8000);
-  };
-  const handleCancelled = () => {
-    setCancelled(true);
-    const toastConatiner = document.getElementsByClassName(
-      "cancel-Toast-Container"
-    )[0];
-    toastConatiner.classList.add("slide-in");
-    setTimeout(() => {
-      if(cancelled) {
-        dismissToast("cancel-Toast-Container");
-        setCancelled(false);
-      }
-    }, 8000);
+  const showToast = () => {
+    let toastProperties = null;
+    switch (type) {
+      case "Accept":
+        toastProperties = {
+          id: 1,
+          description: "Thank you!",
+          backgroundColor: "#5cb85c",
+          position: "top-right",
+        };
+        break;
+      case "Cancel":
+        toastProperties = {
+          id: 2,
+          description: "Come back soon.",
+          backgroundColor: '#f0ad4e',
+          position: "bottom-right",
+        };
+        break;
+      default:
+        setList([]);
+    }
+    setList([...list, toastProperties]);
   };
 
   return (
-    <div className="app" onClick={() => dismissAllToasts()}>
-      <div className="toast-Container accept-Toast-Container">
-        <AcceptToast />
+    <div className="app">
+      <div className="app-header">
+        <div className="toast-buttons">
+          {BUTTON_PROPS.map(button => (
+            <Button
+              key={button.id}
+              className={button.className}
+              label={button.label}
+              handleClick={() => showToast(button.type)}
+            />
+          ))}
+        </div>
       </div>
-      <div className="buttons-Container">
-        <AcceptButton clicked={() => handleAccepted()} />
-        <CancelButton clicked={() => handleCancelled()} />
-      </div>
-      <div className="toast-Container cancel-Toast-Container">
-        <CancelToast />
-      </div>
+      <Toast
+        toastList={list}
+      />
     </div>
   );
 };
-
 export default App;
