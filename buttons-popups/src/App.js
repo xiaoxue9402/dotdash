@@ -1,6 +1,6 @@
-import React from "react";
-import Toast from './Toast.js';
-import Button from './Button.js';
+import React, { useState, useEffect } from "react";
+import Toast from "./Toast.js";
+import Button from "./Button.js";
 
 import "./App.css";
 
@@ -22,33 +22,40 @@ const App = () => {
     }
   ];
 
-  const showToast = () => {
+  const showToast = type => {
     let toastProperties = null;
     switch (type) {
-      case "Accept":
+      case "accept":
         toastProperties = {
           id: 1,
           description: "Thank you!",
           backgroundColor: "#5cb85c",
-          position: "top-right",
+          position: "top-right"
         };
         break;
-      case "Cancel":
+      case "cancel":
         toastProperties = {
           id: 2,
           description: "Come back soon.",
-          backgroundColor: '#f0ad4e',
-          position: "bottom-right",
+          backgroundColor: "#f0ad4e",
+          position: "bottom-right"
         };
         break;
       default:
         setList([]);
     }
     setList([...list, toastProperties]);
+    console.log(list);
+  };
+
+  const dismissAll = className => {
+    if (className !== "accept" || ("cancel" && list && list.length)) {
+      setList([]);
+    }
   };
 
   return (
-    <div className="app">
+    <div className="app" onClick={event => dismissAll(event.target.className)}>
       <div className="app-header">
         <div className="toast-buttons">
           {BUTTON_PROPS.map(button => (
@@ -56,14 +63,13 @@ const App = () => {
               key={button.id}
               className={button.className}
               label={button.label}
+              type={button.type}
               handleClick={() => showToast(button.type)}
             />
           ))}
         </div>
       </div>
-      <Toast
-        toastList={list}
-      />
+      <Toast toastList={list} />
     </div>
   );
 };

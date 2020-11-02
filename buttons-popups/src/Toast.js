@@ -9,6 +9,27 @@ const Toast = props => {
   useEffect(() => {
     setList(toastList);
   }, [toastList, list]);
+
+  const removeToast = id => {
+    const listItemIndex = list.findIndex(toast => toast.id === id);
+    const toastListItem = toastList.findIndex(toast => toast.id === id);
+    list.splice(listItemIndex, 1);
+    toastList.splice(toastListItem, 1);
+    setList([...list]);
+  };
+
+  useEffect(() => {
+    console.log(list, toastList)
+    const interval = setInterval(() => {
+      if (toastList.length && list.length) {
+        removeToast(toastList[0].id);
+      }
+    }, 8000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [toastList, list]);
+
   return (
     <>
       {list.map((toast, i) => (
