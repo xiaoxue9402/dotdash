@@ -1,1 +1,45 @@
+.app {
+  text-align: center;
+}
 
+.app-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.toast-buttons {
+  display: flex;
+  margin-top: 25%;
+}
+
+.toast-buttons button {
+  font-size: 14px;
+  font-weight: bold;
+  width: 100px;
+  height: 50px;
+  margin: 0 10px;
+  border-radius: 8px;
+}
+
+.accept {
+  color: #5cb85c;
+  border: solid #5cb85c 1px;
+}
+
+.accept:hover {
+  color: white;
+  background: #5cb85c;
+}
+
+.cancel {
+  color: #f0ad4e;
+  border: solid #f0ad4e 1px;
+}
+
+.cancel:hover {
+  color: white;
+  background: #f0ad4e;
+}

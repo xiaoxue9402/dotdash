@@ -49,19 +49,19 @@ const App = () => {
   };
 
   const dismissAll = className => {
-    if (className !== "accept" || ("cancel" && list && list.length)) {
+    if (className !== 'button' && list && list.length) {
       setList([]);
     }
   };
 
   return (
     <div className="app" onClick={event => dismissAll(event.target.className)}>
-      <div className="app-header">
+      <div className="app-body">
         <div className="toast-buttons">
           {BUTTON_PROPS.map(button => (
             <Button
               key={button.id}
-              className={button.className}
+              className={`button ${button.className}`}
               label={button.label}
               type={button.type}
               handleClick={() => showToast(button.type)}
