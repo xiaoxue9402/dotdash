@@ -19,7 +19,6 @@ const Toast = props => {
   };
 
   useEffect(() => {
-    console.log(list, toastList)
     const interval = setInterval(() => {
       if (toastList.length && list.length) {
         removeToast(toastList[0].id);

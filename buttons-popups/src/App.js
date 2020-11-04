@@ -45,7 +45,6 @@ const App = () => {
         setList([]);
     }
     setList([...list, toastProperties]);
-    console.log(list);
   };
 
   const dismissAll = className => {
