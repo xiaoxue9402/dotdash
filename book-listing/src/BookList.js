@@ -1,0 +1,27 @@
+import React, { useState, useEffect } from "react";
+
+const BookList = props => {
+  const { bookList } = props;
+  const [list, setList] = useState(bookList);
+
+  useEffect(() => {
+    setList(bookList);
+  }, [bookList]);
+
+  console.log(list);
+
+  return (
+    <>
+      {list.map((book, i) => (
+        <div key={i} className="book-container">
+          <img src={book.imageUrl} />
+          <div className="book-description">
+            {book.title} by {book.authorName}
+          </div>
+        </div>
+      ))}
+    </>
+  );
+};
+
+export default BookList;
