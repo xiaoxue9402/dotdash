@@ -28,12 +28,16 @@ function App() {
 
   return (
     <div className="App">
+      <div className="search-input">
       <SearchInput
         handleSearch={(input) => setInput(input)}
       />
+      </div>
+      <div className="books-container">
       <BookList
         bookList={searchResults}
       />
+      </div>
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import "./BookList.css";
+
 const BookList = props => {
   const { bookList } = props;
   const [list, setList] = useState(bookList);
@@ -14,7 +16,7 @@ const BookList = props => {
     <>
       {list.map((book, i) => (
         <div key={i} className="book-container">
-          <img src={book.imageUrl} />
+          <img className="cover-image" src={book.imageUrl} />
           <div className="book-description">
             {book.title} by {book.authorName}
           </div>
