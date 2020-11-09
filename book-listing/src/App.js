@@ -13,8 +13,8 @@ function App() {
     return fetch(`https://goodreads-server-express--dotdash.repl.co/search/${input}`, {
       mode: "cors",
       headers: {
-        "Access-Control-Allow-Origin": "*"
-      }
+        "Access-Control-Allow-Origin": "*",
+      },
     }).then(response => response.json())
     .then(data => setSearchResults(data.list))
 
